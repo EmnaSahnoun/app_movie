@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/utils/constants.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732911145503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732911145503,
+            "name": "Commit-0",
+            "content": "const String apiKey = '5d2557bc7438773136e01362985c1b2b';\r\nconst String baseUrl = 'https://api.themoviedb.org/3';\r\nconst String imageUrl = 'https://image.tmdb.org/t/p/w500';\r\n"
+        }
+    ]
+}

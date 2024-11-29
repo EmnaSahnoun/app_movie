@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/services/api_client.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732911439662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732911439662,
+            "name": "Commit-0",
+            "content": "import 'dart:convert';\r\nimport 'package:http/http.dart' as http;\r\nimport '../utils/constants.dart';\r\n\r\nclass ApiClient {\r\n  Future<dynamic> getRequest(String endpoint) async {\r\n    final response = await http.get(Uri.parse('$baseUrl$endpoint?api_key=$apiKey'));\r\n    if (response.statusCode == 200) {\r\n      return json.decode(response.body);\r\n    } else {\r\n      throw Exception('Failed to load data: ${response.statusCode}');\r\n    }\r\n  }\r\n\r\n  Future<dynamic> postRequest(String endpoint, Map<String, dynamic> body) async {\r\n    final response = await http.post(\r\n      Uri.parse('$baseUrl$endpoint?api_key=$apiKey'),\r\n      headers: {'Content-Type': 'application/json'},\r\n      body: json.encode(body),\r\n    );\r\n    if (response.statusCode == 200) {\r\n      return json.decode(response.body);\r\n    } else {\r\n      throw Exception('Failed to post data: ${response.statusCode}');\r\n    }\r\n  }\r\n\r\n  Future<void> deleteRequest(String endpoint) async {\r\n    final response = await http.delete(Uri.parse('$baseUrl$endpoint?api_key=$apiKey'));\r\n    if (response.statusCode != 200) {\r\n      throw Exception('Failed to delete data: ${response.statusCode}');\r\n    }\r\n  }\r\n}\r\n"
+        }
+    ]
+}

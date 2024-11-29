@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/services/account_service.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732911470883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732911470883,
+            "name": "Commit-0",
+            "content": "import '../services/api_client.dart';\r\n\r\nclass AccountService {\r\n  final ApiClient _apiClient = ApiClient();\r\n\r\n  Future<void> addFavorite(int accountId, int movieId, bool favorite) async {\r\n    await _apiClient.postRequest(\r\n      '/account/$accountId/favorite',\r\n      {\r\n        'media_type': 'movie',\r\n        'media_id': movieId,\r\n        'favorite': favorite,\r\n      },\r\n    );\r\n  }\r\n\r\n  Future<void> addToWatchlist(int accountId, int movieId, bool watchlist) async {\r\n    await _apiClient.postRequest(\r\n      '/account/$accountId/watchlist',\r\n      {\r\n        'media_type': 'movie',\r\n        'media_id': movieId,\r\n        'watchlist': watchlist,\r\n      },\r\n    );\r\n  }\r\n}\r\n"
+        }
+    ]
+}

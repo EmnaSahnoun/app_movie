@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/models/movie_preview.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732911703164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732911703164,
+            "name": "Commit-0",
+            "content": "class MoviePreview {\r\n  final int id;\r\n  final String title;\r\n  final String? posterPath;\r\n  final String? backdropPath;\r\n  final double? voteAverage;\r\n  final String? releaseDate;\r\n\r\n  MoviePreview({\r\n    required this.id,\r\n    required this.title,\r\n    this.posterPath,\r\n    this.backdropPath,\r\n    this.voteAverage,\r\n    this.releaseDate,\r\n  });\r\n\r\n  factory MoviePreview.fromJson(Map<String, dynamic> json) {\r\n    return MoviePreview(\r\n      id: json['id'] as int,\r\n      title: json['title'] as String,\r\n      posterPath: json['poster_path'] as String?,\r\n      backdropPath: json['backdrop_path'] as String?,\r\n      voteAverage: (json['vote_average'] as num?)?.toDouble(),\r\n      releaseDate: json['release_date'] as String?,\r\n    );\r\n  }\r\n\r\n  String getPosterUrl() {\r\n    return posterPath != null\r\n        ? 'https://image.tmdb.org/t/p/w500$posterPath'\r\n        : 'https://via.placeholder.com/500x750?text=No+Image';\r\n  }\r\n\r\n  String getBackdropUrl() {\r\n    return backdropPath != null\r\n        ? 'https://image.tmdb.org/t/p/w780$backdropPath'\r\n        : 'https://via.placeholder.com/780x439?text=No+Image';\r\n  }\r\n}\r\n"
+        }
+    ]
+}

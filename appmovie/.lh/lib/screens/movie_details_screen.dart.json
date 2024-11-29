@@ -1,0 +1,26 @@
+{
+    "sourceFile": "lib/screens/movie_details_screen.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1732912144502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1732913667005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,90 @@\n import 'package:flutter/material.dart';\r\n+import '../models/movie_details.dart';\r\n+import '../services/movie_service.dart';\r\n \r\n-class MovieDetailsScreen extends StatelessWidget {\r\n+class MovieDetailsScreen extends StatefulWidget {\r\n+  final int movieId;\r\n+\r\n+  MovieDetailsScreen({required this.movieId});\r\n+\r\n   @override\r\n+  _MovieDetailsScreenState createState() => _MovieDetailsScreenState();\r\n+}\r\n+\r\n+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {\r\n+  final MovieService _movieService = MovieService();\r\n+  late Future<MovieDetails> _movieDetailsFuture;\r\n+\r\n+  @override\r\n+  void initState() {\r\n+    super.initState();\r\n+    _movieDetailsFuture = _movieService.fetchMovieDetails(widget.movieId);\r\n+  }\r\n+\r\n+  @override\r\n   Widget build(BuildContext context) {\r\n     return Scaffold(\r\n       appBar: AppBar(\r\n         title: Text('Movie Details'),\r\n       ),\r\n-      body: Center(\r\n-        child: Text('Details of the selected movie will be displayed here.'),\r\n+      body: FutureBuilder<MovieDetails>(\r\n+        future: _movieDetailsFuture,\r\n+        builder: (context, snapshot) {\r\n+          if (snapshot.connectionState == ConnectionState.waiting) {\r\n+            return Center(child: CircularProgressIndicator());\r\n+          } else if (snapshot.hasError) {\r\n+            return Center(child: Text('Error: ${snapshot.error}'));\r\n+          } else if (!snapshot.hasData) {\r\n+            return Center(child: Text('No details found.'));\r\n+          } else {\r\n+            final movie = snapshot.data!;\r\n+            return SingleChildScrollView(\r\n+              child: Column(\r\n+                crossAxisAlignment: CrossAxisAlignment.stretch,\r\n+                children: [\r\n+                  Image.network(\r\n+                    movie.getBackdropUrl(),\r\n+                    fit: BoxFit.cover,\r\n+                    errorBuilder: (context, error, stackTrace) {\r\n+                      return Center(child: Icon(Icons.broken_image, size: 50));\r\n+                    },\r\n+                  ),\r\n+                  Padding(\r\n+                    padding: const EdgeInsets.all(16.0),\r\n+                    child: Column(\r\n+                      crossAxisAlignment: CrossAxisAlignment.start,\r\n+                      children: [\r\n+                        Text(\r\n+                          movie.title,\r\n+                          style: TextStyle(\r\n+                            fontSize: 24,\r\n+                            fontWeight: FontWeight.bold,\r\n+                          ),\r\n+                        ),\r\n+                        SizedBox(height: 8),\r\n+                        Text(\r\n+                          'Release Date: ${movie.releaseDate ?? 'Unknown'}',\r\n+                          style: TextStyle(fontSize: 16),\r\n+                        ),\r\n+                        SizedBox(height: 8),\r\n+                        Text(\r\n+                          'Rating: ${movie.voteAverage?.toStringAsFixed(1) ?? 'N/A'}/10',\r\n+                          style: TextStyle(fontSize: 16),\r\n+                        ),\r\n+                        SizedBox(height: 16),\r\n+                        Text(\r\n+                          movie.overview ?? 'No description available.',\r\n+                          style: TextStyle(fontSize: 16),\r\n+                        ),\r\n+                      ],\r\n+                    ),\r\n+                  ),\r\n+                ],\r\n+              ),\r\n+            );\r\n+          }\r\n+        },\r\n       ),\r\n     );\r\n   }\r\n }\r\n"
+                },
+                {
+                    "date": 1732913760904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \r\n class MovieDetailsScreen extends StatefulWidget {\r\n   final int movieId;\r\n \r\n-  MovieDetailsScreen({required this.movieId});\r\n+  MovieDetailsScreen({required this});\r\n \r\n   @override\r\n   _MovieDetailsScreenState createState() => _MovieDetailsScreenState();\r\n }\r\n"
+                }
+            ],
+            "date": 1732912144502,
+            "name": "Commit-0",
+            "content": "import 'package:flutter/material.dart';\r\n\r\nclass MovieDetailsScreen extends StatelessWidget {\r\n  @override\r\n  Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: Text('Movie Details'),\r\n      ),\r\n      body: Center(\r\n        child: Text('Details of the selected movie will be displayed here.'),\r\n      ),\r\n    );\r\n  }\r\n}\r\n"
+        }
+    ]
+}

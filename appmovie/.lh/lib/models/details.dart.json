@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/models/details.dart",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732894764435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732894764435,
+            "name": "Commit-0",
+            "content": "class Movie {\r\n  final int id;\r\n  final String title;\r\n  final String overview;\r\n  final String posterPath;\r\n\r\n  Movie({\r\n    required this.id,\r\n    required this.title,\r\n    required this.overview,\r\n    required this.posterPath,\r\n  });\r\n\r\n  factory Movie.fromJson(Map<String, dynamic> json) {\r\n    return Movie(\r\n      id: json['id'],\r\n      title: json['title'] ?? 'No Title',\r\n      overview: json['overview'] ?? 'No Description',\r\n      posterPath: json['poster_path'] ?? '',\r\n    );\r\n  }\r\n}\r\n"
+        }
+    ]
+}
